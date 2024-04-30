@@ -31,10 +31,21 @@ Ch1 measurements at 208 - 255 (12 4byte fields)
 Ch2 measurements at 256 - 303 (12 4byte fields)
 
 VMax,VMin,Vavg,Vrms,Vpp,Vp,Freq,Cysle,Time+,Time-,Duty+,Duty-
-Last 2 bytes of 4 byte field give little endian voltages but with a  mysteries
-	VMin can be negative but I can't see a sign bit yet
-Freq seems to be in Hz
-DOn't yet understand Time+/- or Cycle yet
+INT32 - Mid-Big Endian (BADC) is used for encoding
+VMax,VMin,Vavg,Vrms,Vpp,Vp values are in millivolts (divide by 1000 for values in volts)
+Freq is not so simple here, I assume that values from 0 to 256 (maybe higher) give MHz up to about 1000 give KHz and then the values are in millihertz, that is, you need to divide by 1000 to get hertz.
+here's an example:
+00 00 00 01 - 256 Mhz (256)
+00 00 01 00 - 1 Mhz (1)
+00 10 00 00 - 268 Khz (268435456)
+00 01 00 00 - 16.7 Khz (16777216)
+10 00 00 00 - 1.04 Khz (1048576)
+00 00 e9 03 - 1 Khz (1001)
+01 00 18 87 - 100 hz (100120)
+01 00 00 00 - 65.5 hz (65536)
+
+Cysle, Time+, Time - I assume that here, just like with frequency, it is necessary to convert to nS, uS, mS, S.
+Duty+, Duty- are measured as percentages
 
 
 dataBlock1 1500 2 byte fields (little endian) which represent the total captured values. Values range from 0 - 399 where level 200 represents 0 and 50 units represents the scale of the sensitivity.
