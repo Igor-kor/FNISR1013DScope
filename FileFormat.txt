@@ -6,6 +6,12 @@
 10000 - 14999 seems to be just nulls in my captures so far.
 
 The header data
+CH1 On/Off at 2
+CH2 On/Off at 12
+
+CH1FFT On/Off at 6
+CH2FFT On/Off at 16
+
 CH1 vertical scale at 4 where 0-6 represents 5.0V,2.5V,1.0V,500mV,200mV,100mV,50mV/div
 CH2 vertical scale at 14 (same as CH1
 
@@ -24,6 +30,7 @@ Trigger edge at 28 0 - 1 RISING, FALLING
 
 Screen Brightness at 120 0-99
 Grid Brightness at 122 0-99
+XYMode draw at 126
 
 Scroll speed at 24 0 - 1 Fast, Slow
 
